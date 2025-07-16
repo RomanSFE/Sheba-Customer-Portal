@@ -12,7 +12,7 @@ function SignUp() {
   const handleSignup = (e) => {
     e.preventDefault();
     if (signUp(email, password)) {
-      navigate("/"); // ✅ redirect to home
+      navigate("/");
     } else {
       setError("Sign up failed. Try again.");
     }

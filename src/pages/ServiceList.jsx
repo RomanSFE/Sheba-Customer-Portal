@@ -45,6 +45,11 @@ function ServiceList() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {visibleServices.map((service) => (
           <div key={service.id} className="border p-4 rounded shadow dark:bg-gray-800">
+            <img
+              src={service.img}
+              alt={service.name}
+              className="w-full h-40 object-cover rounded"
+            />
             <h3 className="text-lg font-semibold text-gray-800 dark:text-white">{service.name}</h3>
             <p className="text-gray-600 dark:text-gray-300 text-sm">{service.description}</p>
             <p className="text-blue-600 font-bold mt-2">৳ {service.price}</p>

@@ -5,8 +5,8 @@ import { useAuth } from "../context/AuthContext";
 function SignIn() {
   const { signIn } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation(); // ✅ get current location
-  const from = location.state?.from?.pathname || "/"; // ✅ fallback to home
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -14,7 +14,7 @@ function SignIn() {
   const handleLogin = (e) => {
     e.preventDefault();
     if (signIn(email, password)) {
-      navigate(from); // ✅ go back to previous protected route
+      navigate(from);
     } else {
       setError("Invalid credentials");
     }

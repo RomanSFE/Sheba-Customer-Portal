@@ -8,17 +8,30 @@ function ServiceDetail() {
   const [service, setService] = useState(null);
 
   useEffect(() => {
-    // Simulate loading delay
     setTimeout(() => {
       const found = services.find((s) => s.id === id);
       setService(found);
       setLoading(false);
-    }, 1200); // 1.2s delay
+    }, 1200);
   }, [id]);
+
+  useEffect(() => {
+    if (service) {
+      const shortDesc = service.description.length > 50
+        ? service.description.substring(0, 50) + "..."
+        : service.description;
+
+      document.title = `${service.name} - ${shortDesc}`;
+    }
+    return () => {
+      document.title = "Sheba.xyz";
+    };
+  }, [service]);
 
   if (loading) {
     return (
       <div className="max-w-3xl mx-auto mt-10 p-6 space-y-4 animate-pulse">
+        <div className="w-full h-48 bg-gray-300 dark:bg-gray-700 rounded-lg"></div>
         <div className="h-6 bg-gray-300 dark:bg-gray-700 rounded w-1/3"></div>
         <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-2/3"></div>
         <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/2"></div>
@@ -40,6 +53,13 @@ function ServiceDetail() {
 
   return (
     <div className="max-w-3xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 rounded shadow">
+      <div>
+        <img
+          src={service.img}
+          alt={service.name}
+          className="w-full h-40 object-cover rounded"
+        />
+      </div>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-bold dark:text-white">{service.name}</h2>
         <Link
